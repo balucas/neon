@@ -20,6 +20,7 @@ const registerReducer = (state  = initState, action) => {
                 regState: 'registered'
             }
         case 'REG_RESET':
+            console.log('reset register state')
             return initState
         default:
             return state;

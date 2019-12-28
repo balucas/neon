@@ -6,6 +6,8 @@ import ProjectPage from './components/project/ProjectPage'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
 import CreateProject from './components/project/CreateProject'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   render(){
@@ -13,6 +15,10 @@ class App extends Component {
     <BrowserRouter>
       <div className="App">
         <NavigationBar/>
+        <ToastContainer
+          hideProgressBar
+          autoClose={2000}
+          />
 				<Switch>
 					<Route exact path='/' component={SignUp}/> 
           <Route path='/project/:id' component={ProjectPage}/>
