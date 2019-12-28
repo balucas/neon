@@ -7,14 +7,25 @@ const registerReducer = (state  = initState, action) => {
     switch(action.type){
         case 'REG_ERROR':
                 console.log('register error');
-                debugger;
+
+                var errText = ''
+                switch(action.res.constraint){
+                    case 'missing_field':
+                        errText = 'Error: Missing fields'
+                        break
+                    case '_bt_check_unique':
+                        errText = 'Email is already taken. Try another.'
+                        break
+                    default:
+                        errText = 'Unknown Error. Try again'
+                        break
+                }
             return {
                 ...state,
-                error: 'Registration failed'
+                error: errText
             }
         case 'REG_SUCCESS':
             console.log('register success');
-            debugger;
             return {
                 ...state,
                 regState: 'registered'

@@ -20,7 +20,7 @@ class App extends Component {
           autoClose={2000}
           />
 				<Switch>
-					<Route exact path='/' component={SignUp}/> 
+					<Route exact path='/' component={SignIn}/> 
           <Route path='/project/:id' component={ProjectPage}/>
           <Route path='/signin' component={SignIn}/>
           <Route path='/signup' component={SignUp}/>
