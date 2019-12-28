@@ -1,5 +1,5 @@
 export function testAction(){
-    return dispatch => {
+    return (dispatch) => {
         // async call to db here
         
         return fetch("http://localhost:9000/testAPI")

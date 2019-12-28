@@ -3,13 +3,13 @@ export const signIn = (credentials) => {
         const firebase = getFirebase();
 
         //authenticate
-        firebase.auth().signInWithEmailAndPassword(
-            credentials.email,
-            credentials.password
-        ).then(() => {
-            dispatch({ type: 'LOGIN_SUCCESS' });
-        }).catch((err) => {
-            dispatch({ type: 'LOGIN_ERROR', err });
-        })
+        // firebase.auth().signInWithEmailAndPassword(
+        //     credentials.email,
+        //     credentials.password
+        // ).then(() => {
+        //     dispatch({ type: 'LOGIN_SUCCESS' });
+        // }).catch((err) => {
+        //     dispatch({ type: 'LOGIN_ERROR', err });
+        // })
     }
 }
