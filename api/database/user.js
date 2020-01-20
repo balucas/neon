@@ -22,10 +22,13 @@ async function authenticate(email, password) {
 async function find(email){
 
     return(
-        db.oneOrNone('SELECT FROM users (email) VALUES ($1)', 
-            [email])
+        db.oneOrNone('SELECT FROM users WHERE email = $1', 
+            email)
             .then(function (data) {  //User found
                 return data;
+            }).catch(function (error) {
+                console.log('find err ' + error);
+                return null
             })
     )
 }
@@ -35,8 +38,8 @@ async function findOne(email){
     console.log('findone ' + email);
     //Create user
     return(
-        db.one('SELECT id FROM users (email) VALUES ($1)', 
-            email)
+        db.one('SELECT id FROM users WHERE email = $1', 
+            [email])
             .then(function (data) {  //User found
                 console.log('findone ' + data);
                 return data;
@@ -52,11 +55,14 @@ async function create(user) {
 
     //Create user
     return(
-    db.any('INSERT INTO users (email, first_name, last_name, password) VALUES ($1, $2, $3, crypt($4, gen_salt(\'bf\')))', 
-        [user.email, user.firstname, user.lastname, user.password])
-        .then(function (data) {  //User created
-            return data
-        })
+        db.any('INSERT INTO users (email, first_name, last_name, password) VALUES ($1, $2, $3, crypt($4, gen_salt(\'bf\')))', 
+            [user.email, user.firstname, user.lastname, user.password])
+            .then(function (data) {  //User created
+                return data
+            }).catch(function (error) {
+                console.log('create err ' + error);
+                return null
+            })
     )
 }
 

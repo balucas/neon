@@ -9,7 +9,7 @@ var passport = require('passport')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPIRouter = require("./routes/testAPI");
-var testlogin = require('./routes/loginUser');    //TEST
+var auth = require('./routes/loginUser');    //TEST
 
 
 var app = express();
@@ -18,7 +18,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-require('./auth/passport');                       //TEST
+require('./auth/passport');                      
 
 app.use(passport.initialize());
 app.use(cors());
@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/testAPI", testAPIRouter);
-app.use('/testLogin', testlogin);                 //TEST
+app.use('/auth', auth);                
 
 
 // catch 404 and forward to error handler

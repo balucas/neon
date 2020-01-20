@@ -5,15 +5,10 @@
 // import Sequelize from 'sequelize';
 const jwtSecret = require('./jwtConfig');
 
-// const BCRYPT_SALT_ROUNDS = 12;
-// eslint-disable-next-line prefer-destructuring
-// const Op = Sequelize.Op;
-
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
-// const User = require('../sequelize');
 
 const User = require('../database/user');
 
@@ -27,8 +22,6 @@ passport.use(
       session: false,
     },
     (req, username, password, done) => {
-      console.log(username);
-      console.log(req.body.email);
 
       try {
         User.find(req.body.email)
@@ -39,21 +32,14 @@ passport.use(
               message: 'username or email already taken',
             });
           }
-          // bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-          //   User.create({
-          //     username,
-          //     password: hashedPassword,
-          //     email: req.body.email,
-          //   }).then(user => {
-          //     console.log('user created');
-          //     return done(null, user);
-          //   });
-          // });
           User.create({
             email: username,
             password: password,
-            firstname: req.first,
-            lastname: req.last
+            firstname: req.body.firstName,
+            lastname: req.body.lastName
+          }).then(user => {
+            console.log('created user')
+            return done(null, user);
           })
         });
       } catch (err) {
@@ -82,16 +68,6 @@ passport.use(
             }else{
               return done(null, user);
             }
-            
-          // bcrypt.compare(password, user.password).then(response => {
-          //   if (response !== true) {
-          //     console.log('passwords do not match');
-          //     return done(null, false, { message: 'passwords do not match' });
-          //   }
-          //   console.log('user found & authenticated');
-          //   return done(null, user);
-          // });
-
         });
       } catch (err) {
         console.log('ERR use login: ' + err);

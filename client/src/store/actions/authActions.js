@@ -4,26 +4,12 @@ export const signIn = (credentials) => {
     const email = credentials.email;
     const password = credentials.password;
     return (dispatch) => {
-        // return fetch("http://localhost:9000/testLogin/loginUser", 
-        //     {
-        //         method: 'POST',
-        //         mode: 'cors',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         data: JSON.stringify(credentials)
-        //     })
-        return axios.post('http://localhost:9000/testLogin/loginUser',
+        return axios.post('http://localhost:9000/auth/login',
             {
                 email, 
                 password
             })
-            // .then(res => {
-            //     debugger;
-            //     res.text();
-            // })
             .then((res) => {
-                // res = JSON.parse(res);
                 if(!res.data.auth){
                     debugger;
                     var err = res.message

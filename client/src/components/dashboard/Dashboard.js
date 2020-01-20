@@ -9,7 +9,7 @@ import { testAction } from '../../store/actions/testAction'
 class Dashboard extends Component {
 
     componentWillMount() {
-        this.props.testAction();
+        // this.props.testAction();
     }
 
     render(){
@@ -20,7 +20,7 @@ class Dashboard extends Component {
             <div className="dashboard container">
                 <div className="row">
                     <div className="col s12 m12">
-                    <p className="App-intro">Response: {testCall}</p>
+                    {/* <p className="App-intro">Response: {testCall}</p> */}
                         {/* <ProjectList projects ={projects}/> */}
                     </div>
                     {/* <div className="col s12 m5 offset-m1">
